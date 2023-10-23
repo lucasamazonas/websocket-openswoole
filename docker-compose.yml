@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chat-ws-swoole
+    ports:
+      - "${APP_PORT:-9501}:${APP_PORT:-9501}"
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - backend
+    entrypoint: ["./bin/start_server_development.sh", "mode=${APP_MODE:-development}"]
+
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+
+networks:
+  backend:
+    driver: bridge

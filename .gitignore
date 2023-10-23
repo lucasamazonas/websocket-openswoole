@@ -1,0 +1,8 @@
+vendor
+composer.lock
+
+# JetBrains IDE
+.idea/
+
+# Unit test reports
+TEST*.xml
