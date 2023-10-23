@@ -1,0 +1,24 @@
+{
+    "name": "mawe/lucasamazonas",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "lucasamazonas",
+            "email": "lucassilvaamazonas@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "doctrine/orm": "^2.16",
+        "doctrine/dbal": "^3.2",
+        "symfony/yaml": "^5.4",
+        "symfony/cache": "^5.4"
+    },
+    "require-dev": {
+        "openswoole/ide-helper": "^22.0"
+    }
+}
