@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Infra;
+namespace App;
 
 use Doctrine\DBAL\{DriverManager, Exception};
-use Doctrine\ORM\{EntityManager, ORMSetup, Exception\MissingMappingDriverImplementation};
+use Doctrine\ORM\{EntityManager, Exception\MissingMappingDriverImplementation, ORMSetup};
 
 class EntityManagerCreator
 {
+
     /**
      * @throws MissingMappingDriverImplementation
      * @throws Exception
@@ -26,11 +27,11 @@ class EntityManagerCreator
             'dbname'   => $_ENV['DB_NAME'],
             'user'     => $_ENV['DB_USER'],
             'password' => $_ENV['DB_PASSWORD'],
-            'allowPublicKeyRetrieval' => true
         ];
 
         $connection = DriverManager::getConnection($params, $config);
 
         return new EntityManager($connection, $config);
     }
+
 }

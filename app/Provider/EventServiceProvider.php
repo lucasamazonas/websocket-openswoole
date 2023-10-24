@@ -1,11 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Provider;
 
 use App\Event\Event;
 use App\Exception\NoListenerEventException;
-use App\Event\{OpenEvent, RequestEvent, StartEvent, MessageEvent};
-use App\Listener\{Listener, MessageLogListener, OpenListener, RequestListener, StartListener, MessageListener};
+use App\Event\{DisconnectEvent, OpenEvent, RequestEvent, StartEvent, MessageEvent};
+use App\Listener\{DisconnectListener,
+    Listener,
+    MessageLogListener,
+    OpenListener,
+    RequestListener,
+    StartListener,
+    MessageListener};
 
 class EventServiceProvider
 {
@@ -23,6 +31,9 @@ class EventServiceProvider
         ],
         RequestEvent::class => [
             RequestListener::class,
+        ],
+        DisconnectEvent::class => [
+            DisconnectListener::class,
         ]
     ];
 

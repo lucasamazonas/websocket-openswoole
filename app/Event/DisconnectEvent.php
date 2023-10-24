@@ -8,13 +8,9 @@ class DisconnectEvent implements Event
 {
 
     public function __construct(
-
+        public readonly int $fd,
     )
     {
     }
 
-    public function resolve(): void
-    {
-
-    }
 }

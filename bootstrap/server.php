@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 require_once 'app_configuration.php';
 
-use App\Infra\App;
-use OpenSwoole\WebSocket\{Server, Frame};
-use OpenSwoole\Http\{Request, Response};
-use App\Event\{StartEvent, CloseEvent, DisconnectEvent, MessageEvent, OpenEvent, RequestEvent};
+use App\App;
+use App\Event\{CloseEvent, DisconnectEvent, MessageEvent, OpenEvent, RequestEvent, StartEvent};
 use App\Provider\EventServiceProvider;
+use OpenSwoole\Http\{Request, Response};
+use OpenSwoole\WebSocket\{Frame, Server};
 
 $app = new App();
 $server = new Server('0.0.0.0', (int) $_ENV['APP_PORT']);
@@ -34,13 +34,8 @@ $server->on('Request', function(Request $request, Response $response) {
     EventServiceProvider::dispatcher($event);
 });
 
-$server->on('Close', function(Server $server, int $fd) {
-    $event = new CloseEvent();
-    EventServiceProvider::dispatcher($event);
-});
-
 $server->on('Disconnect', function(Server $server, int $fd) {
-    $event = new DisconnectEvent();
+    $event = new DisconnectEvent($fd);
     EventServiceProvider::dispatcher($event);
 });
 

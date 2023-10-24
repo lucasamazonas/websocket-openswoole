@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Listener;
 
 use App\Event\StartEvent;
@@ -8,7 +10,7 @@ class StartListener implements Listener
 {
 
     public function __construct(
-        private readonly StartEvent $startEvent
+        private readonly StartEvent $startEvent,
     )
     {
     }
@@ -20,4 +22,5 @@ class StartListener implements Listener
         echo "Open Swoole Web Socket in http://{$server->host}:{$server->port}" . PHP_EOL;
         echo PHP_EOL . PHP_EOL . PHP_EOL;
     }
+
 }
