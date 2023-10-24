@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Listener;
 
 use App\Entity\Message;
 use App\Entity\User;
+use App\EntityManagerCreator;
 use App\Event\MessageEvent;
-use App\Infra\EntityManagerCreator;
 use App\Repository\MessageRepository;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManager;
@@ -20,7 +22,9 @@ class MessageLogListener implements Listener
      * @throws MissingMappingDriverImplementation
      * @throws Exception
      */
-    public function __construct(private readonly MessageEvent $messageEvent)
+    public function __construct(
+        private readonly MessageEvent $messageEvent,
+    )
     {
         $this->entityManager = EntityManagerCreator::createEntityManager();
     }

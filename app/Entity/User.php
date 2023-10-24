@@ -19,4 +19,8 @@ class User
     #[ORM\Column(length: 150)]
     private string $name;
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
 }

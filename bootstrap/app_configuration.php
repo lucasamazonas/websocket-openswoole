@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+use Doctrine\DBAL\Types\Type;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 Co::set(['hook_flags' => SWOOLE_HOOK_TCP]);
@@ -14,4 +18,4 @@ $dotenv->required([
     'DB_PORT'
 ]);
 
-\Doctrine\DBAL\Types\Type::addType('uuid', 'Ramsey\Uuid\Doctrine\UuidType');
+Type::addType('uuid', 'Ramsey\Uuid\Doctrine\UuidType');

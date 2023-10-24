@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Event;
 
-use App\Infra\App;
+use App\App;
 use OpenSwoole\WebSocket\Frame;
 
 class MessageEvent implements Event
@@ -17,4 +17,5 @@ class MessageEvent implements Event
         $app = new App();
         var_dump($app->getServer()->connections );
     }
+
 }
