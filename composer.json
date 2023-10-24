@@ -1,8 +1,8 @@
 {
-    "name": "mawe/lucasamazonas",
+    "name": "mawe/cmbwebsocket",
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "app/"
         }
     },
     "authors": [
@@ -12,13 +12,16 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "doctrine/orm": "^2.16",
         "doctrine/dbal": "^3.2",
         "symfony/yaml": "^5.4",
-        "symfony/cache": "^5.4"
+        "symfony/cache": "^5.4",
+        "ext-pdo": "*",
+        "vlucas/phpdotenv": "^5.5",
+        "ramsey/uuid-doctrine": "^2.0"
     },
     "require-dev": {
-        "openswoole/ide-helper": "^22.0"
+        "openswoole/ide-helper": "~22.0.1"
     }
 }
