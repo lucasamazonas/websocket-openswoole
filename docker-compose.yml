@@ -5,22 +5,35 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: chat-ws-swoole
+    container_name: cmb_websocket_swoole
     ports:
       - "${APP_PORT:-9501}:${APP_PORT:-9501}"
     volumes:
       - .:/usr/src/app
     networks:
-      - backend
-    entrypoint: ["./bin/start_server_development.sh", "mode=${APP_MODE:-development}"]
+      - cmb_websocket_backend
+    entrypoint: ["./bin/start_server_development.sh"]
 
   db:
     image: mysql:latest
+    container_name: cmb_websocket_mysql
+    depends_on:
+      - app
     environment:
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${DB_PORT:-3306}:${DB_PORT:-3306}"
+    volumes:
+      - cmb_websocket_database:/var/lib/mysql
+    networks:
+      - cmb_websocket_backend
 
 networks:
-  backend:
+  cmb_websocket_backend:
     driver: bridge
+
+volumes:
+  cmb_websocket_database:

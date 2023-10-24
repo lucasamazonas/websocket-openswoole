@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Event;
 
-interface Handler
+interface Event
 {
-
-    public function resolve(): void;
     
 }

@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infra;
 
-use Doctrine\DBAL\DriverManager;
-use Doctrine\DBAL\Exception;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Exception\MissingMappingDriverImplementation;
-use Doctrine\ORM\ORMSetup;
+use Doctrine\DBAL\{DriverManager, Exception};
+use Doctrine\ORM\{EntityManager, ORMSetup, Exception\MissingMappingDriverImplementation};
 
 class EntityManagerCreator
 {
@@ -24,11 +21,12 @@ class EntityManagerCreator
         );
 
         $params = [
-            'host' => 'localhost',
-            'driver'   => 'pdo_mysql',
-            'user'     => 'root',
-            'password' => '',
-            'dbname'   => 'foo',
+            'host'     => $_ENV['DB_HOST'],
+            'driver'   => $_ENV['DB_DRIVER'],
+            'dbname'   => $_ENV['DB_NAME'],
+            'user'     => $_ENV['DB_USER'],
+            'password' => $_ENV['DB_PASSWORD'],
+            'allowPublicKeyRetrieval' => true
         ];
 
         $connection = DriverManager::getConnection($params, $config);

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Event;
 
-class CloseHandler implements Handler
+class CloseEvent implements Event
 {
 
     public function __construct(

@@ -1,10 +1,9 @@
 #!/bin/bash
 
-DIR="$PWD"
 SWOOLE_PID=""
 
 start_server() {
-  php "$DIR/server.php" & SWOOLE_PID=$!
+  php "$PWD/bootstrap/server.php" & SWOOLE_PID=$!
 }
 
 restart_server() {
@@ -18,7 +17,9 @@ restart_server() {
 
 start_server
 
-while inotifywait -e modify,move,create,delete "$DIR"; do
+echo "$PWD"
+
+while inotifywait -r -e modify,move,create,delete "$PWD"; do
   restart_server
 done
 
