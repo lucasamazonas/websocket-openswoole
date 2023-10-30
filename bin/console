@@ -1,13 +1,13 @@
 #!/usr/bin/env php
 <?php
 
-use App\EntityManagerCreator;
+use App\EntityManagerFactory;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 
 require_once __DIR__ . '/../bootstrap/app_configuration.php';
 
-$entityManager = EntityManagerCreator::createEntityManager();
+$entityManager = EntityManagerFactory::getEntityManager();
 
 $commands = [];
 

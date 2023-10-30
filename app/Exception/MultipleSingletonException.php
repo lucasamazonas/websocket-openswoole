@@ -6,7 +6,7 @@ namespace App\Exception;
 
 use Exception;
 
-class NoListenerEventException extends Exception
+class MultipleSingletonException extends Exception
 {
 
 }

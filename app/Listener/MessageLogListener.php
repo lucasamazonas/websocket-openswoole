@@ -4,29 +4,21 @@ declare(strict_types=1);
 
 namespace App\Listener;
 
-use App\Entity\Message;
-use App\Entity\User;
-use App\EntityManagerCreator;
-use App\Event\MessageEvent;
-use App\Repository\MessageRepository;
-use Doctrine\DBAL\Exception;
+use App\App;
+use App\Entity\MessageServer;
+use App\EntityManagerFactory;
+use App\Event\MessageServerEvent;
+use App\Repository\MessageServerRepository;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Exception\MissingMappingDriverImplementation;
 use Doctrine\ORM\Exception\NotSupported;
 
 class MessageLogListener implements Listener
 {
-    private EntityManager $entityManager;
 
-    /**
-     * @throws MissingMappingDriverImplementation
-     * @throws Exception
-     */
     public function __construct(
-        private readonly MessageEvent $messageEvent,
+        public readonly MessageServerEvent $messageServerEvent,
     )
     {
-        $this->entityManager = EntityManagerCreator::createEntityManager();
     }
 
     /**
@@ -34,15 +26,8 @@ class MessageLogListener implements Listener
      */
     public function resolve(): void
     {
-        $userRepository = $this->entityManager->getRepository(User::class);
-
-        $message = new Message();
-        $message->setFrom($userRepository->find(1));
-        $message->addTo($userRepository->find(2));
-        $message->setData($this->messageEvent->frame->data);
-
-        /** @var MessageRepository $messageRepository */
-        $messageRepository = $this->entityManager->getRepository(Message::class);
-        $messageRepository->save($message);
+        /** @var MessageServerRepository $messageServerRepository */
+        $messageServerRepository = App::getEntityManager()->getRepository(MessageServer::class);
+        $messageServerRepository->save($this->messageServerEvent->messageServer);
     }
 }

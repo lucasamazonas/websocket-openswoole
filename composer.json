@@ -19,7 +19,8 @@
         "symfony/cache": "^5.4",
         "ext-pdo": "*",
         "vlucas/phpdotenv": "^5.5",
-        "ramsey/uuid-doctrine": "^2.0"
+        "ramsey/uuid-doctrine": "^2.0",
+        "symfony/validator": "^6.3"
     },
     "require-dev": {
         "openswoole/ide-helper": "~22.0.1"

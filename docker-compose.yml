@@ -6,6 +6,9 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: cmb_websocket_swoole
+    restart: always
+    depends_on:
+      - db
     ports:
       - "${APP_PORT:-9501}:${APP_PORT:-9501}"
     volumes:
@@ -17,8 +20,7 @@ services:
   db:
     image: mysql:latest
     container_name: cmb_websocket_mysql
-    depends_on:
-      - app
+    restart: always
     environment:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USER}

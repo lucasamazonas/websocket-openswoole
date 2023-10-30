@@ -2,18 +2,19 @@
 
 declare(strict_types=1);
 
-namespace App\Provider;
+namespace App;
 
+use App\Event\{DisconnectEvent, MessageClientEvent, MessageServerEvent, OpenEvent, RequestEvent, StartEvent,};
 use App\Event\Event;
-use App\Exception\NoListenerEventException;
-use App\Event\{DisconnectEvent, OpenEvent, RequestEvent, StartEvent, MessageEvent};
+use App\Exception\EventHasNoListenersException;
 use App\Listener\{DisconnectListener,
     Listener,
+    MessageClientToMessageServerListener,
+    MessageListener,
     MessageLogListener,
     OpenListener,
     RequestListener,
-    StartListener,
-    MessageListener};
+    StartListener};
 
 class EventServiceProvider
 {
@@ -25,7 +26,10 @@ class EventServiceProvider
         OpenEvent::class => [
             OpenListener::class,
         ],
-        MessageEvent::class => [
+        MessageClientEvent::class => [
+            MessageClientToMessageServerListener::class,
+        ],
+        MessageServerEvent::class => [
             MessageListener::class,
             MessageLogListener::class,
         ],
@@ -38,12 +42,12 @@ class EventServiceProvider
     ];
 
     /**
-     * @throws NoListenerEventException
+     * @throws EventHasNoListenersException
      */
     public static function dispatcher(Event $event): void
     {
         if (empty(self::$listen[$event::class])) {
-            throw new NoListenerEventException(
+            throw new EventHasNoListenersException(
                 'Nenhum listener esta reagindo ao evento ' . $event::class);
         }
 
