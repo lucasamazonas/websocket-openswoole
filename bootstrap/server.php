@@ -2,17 +2,15 @@
 
 declare(strict_types=1);
 
-require_once 'app_configuration.php';
+/** @var App\App $app */
+$app = require_once 'app_configuration.php';
 
-use App\App;
-use App\Event\{CloseEvent, DisconnectEvent, MessageEvent, OpenEvent, RequestEvent, StartEvent};
-use App\Provider\EventServiceProvider;
+use App\Event\{StartEvent, OpenEvent, MessageClientEvent, RequestEvent, DisconnectEvent};
+use App\EventServiceProvider;
 use OpenSwoole\Http\{Request, Response};
-use OpenSwoole\WebSocket\{Frame, Server};
+use OpenSwoole\WebSocket\{Server, Frame};
 
-$app = new App();
-$server = new Server('0.0.0.0', (int) $_ENV['APP_PORT']);
-$app->setServer($server);
+$server = $app::getServer();
 
 $server->on('Start', function() use ($app) {
     $event = new StartEvent($app);
@@ -24,8 +22,8 @@ $server->on('Open', function(Server $server, Request $request) {
     EventServiceProvider::dispatcher($event);
 });
 
-$server->on('Message', function(Server $server, Frame $frame) use ($app) {
-    $event = new MessageEvent($frame);
+$server->on('Message', function(Server $server, Frame $frame) {
+    $event = new MessageClientEvent($frame);
     EventServiceProvider::dispatcher($event);
 });
 

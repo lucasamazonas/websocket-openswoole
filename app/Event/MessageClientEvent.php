@@ -7,15 +7,15 @@ namespace App\Event;
 use App\App;
 use OpenSwoole\WebSocket\Frame;
 
-class MessageEvent implements Event
+class MessageClientEvent implements Event
 {
 
     public function __construct(
         public readonly Frame $frame,
     )
     {
-        $app = new App();
-        var_dump($app->getServer()->connections );
+//        $app = new App();
+//        var_dump($app->getServer()->connections );
     }
 
 }

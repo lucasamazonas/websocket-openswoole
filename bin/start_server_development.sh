@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sleep 3
+
 SWOOLE_PID=""
 
 start_server() {
@@ -17,9 +19,7 @@ restart_server() {
 
 start_server
 
-echo "$PWD"
-
-while inotifywait -r -e modify,move,create,delete "$PWD"; do
+while inotifywait -r -e modify,move,create,delete "$PWD/app"; do
   restart_server
 done
 

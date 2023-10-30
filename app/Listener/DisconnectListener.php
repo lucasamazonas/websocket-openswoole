@@ -20,6 +20,10 @@ class DisconnectListener implements Listener
     {
         $userId = App::getUserIdConnectionsFromFd($this->disconnectEvent->fd);
 
+        echo PHP_EOL . PHP_EOL . PHP_EOL;
+        var_dump($userId);
+        echo PHP_EOL . PHP_EOL . PHP_EOL . PHP_EOL;
+
         if (is_int($userId)) {
             App::removeConnection($userId);
         }

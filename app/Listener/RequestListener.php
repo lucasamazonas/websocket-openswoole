@@ -17,7 +17,7 @@ class RequestListener implements Listener
 
     public function resolve(): void
     {
-        $this->requestEvent->response->header('Content-Type', 'application/json');
-        $this->requestEvent->response->end();
+        $this->requestEvent->response->status(404);
+        $this->requestEvent->response->end("<h1>Not Found</h1>");
     }
 }
