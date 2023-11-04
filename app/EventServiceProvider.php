@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Event\{DisconnectEvent, MessageClientEvent, MessageServerEvent, OpenEvent, RequestEvent, StartEvent,};
+use App\Event\{DisconnectEvent, MessageClientEvent, MessageServerEvent, OpenEvent, RequestEvent, StartEvent};
 use App\Event\Event;
 use App\Exception\EventHasNoListenersException;
 use App\Listener\{DisconnectListener,
