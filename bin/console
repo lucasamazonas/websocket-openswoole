@@ -7,7 +7,7 @@ use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
 
 require_once __DIR__ . '/../bootstrap/app_configuration.php';
 
-$entityManager = EntityManagerFactory::getEntityManager();
+$entityManager = EntityManagerFactory::createEntityManager();
 
 $commands = [];
 
