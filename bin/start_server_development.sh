@@ -1,11 +1,11 @@
 #!/bin/bash
 
-sleep 5
+sleep 3
 
 SWOOLE_PID=""
 
 start_server() {
-  php "$PWD/bootstrap/server.php" & SWOOLE_PID=$!
+  php "$PWD/server.php" & SWOOLE_PID=$!
 }
 
 restart_server() {

@@ -6,3 +6,5 @@ composer.lock
 
 # Unit test reports
 TEST*.xml
+
+var
