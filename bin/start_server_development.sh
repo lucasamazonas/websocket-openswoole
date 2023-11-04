@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sleep 3
+sleep 5
 
 SWOOLE_PID=""
 
@@ -22,4 +22,3 @@ start_server
 while inotifywait -r -e modify,move,create,delete "$PWD/app"; do
   restart_server
 done
-

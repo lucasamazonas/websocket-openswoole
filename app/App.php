@@ -71,11 +71,6 @@ class App
 
     public static function getConnection(User|int $user): ?int
     {
-
-        echo PHP_EOL . PHP_EOL . PHP_EOL;
-        var_dump(self::$connectionsClient);
-        echo PHP_EOL . PHP_EOL . PHP_EOL . PHP_EOL;
-
         $userId = $user instanceof User ? $user->getId() : $user;
         return self::$connectionsClient[$userId] ?? null;
     }
